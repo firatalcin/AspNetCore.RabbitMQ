@@ -62,4 +62,40 @@
    <li>AMQP protokolünü benimser.</li>
 </ul>
 
+<h3>Exchange Nedir ?</h3>
+<p>Publisher tarafından gönderilen mesajların nasıl yönetileceğini ve hangi route'lara yönlendirileceğini belirlememiz konusunda kontrolü sağlayan, karar veren yapıdır</p>
+<ul>
+  <li>Route ise mesajların exchange üzerinden kuyruklara nasıl gönderileceğini tanımlayan mekanizmadır.</li>
+  <li>Bu süreçte exchange'de bulunan routing key değeri kullanılır.</li>
+  <li>Routing key ile mesajların hangi kuyruklara gönderileceği konusunda exchange'de bilgi tutulur.</li>
+</ul>
+
+<h3>Binding Nedir ?</h3>
+<p>Exchange ve Queue arasındaki ilişkiyi ifade eden yapıdır. Exchange ile kuyruk arasında bağlantı oluşturmanın terminolojik adıdır.</p>
+
+<h3>Direct Exchange</h3>
+<p>Mesajların direkt olarak belirli bir kuyruğa gönderilmesini sağlayan exchange'dir.</p>
+<p>Mesaj, routing key'e uygun olan hedef kuyruklara gönderilir. Bunun için mesaj gönderilecek kuyruğun adını routing key olarak belirtmek yeterlidir.</p>
+<ul>
+   <li>Genellikle hata mesajlarının işlendiği senaryolarda kullanılabilir. Şöyle ki; bir sistemde 'dosya yükleme hatası', 'veritabanı bağlantı hatası' vs. gibi farklı türde veya çeşitte hata mesajları olabilir. Bu hata mesajlarının izlenmesi ve gerektiği takdirde çözülmesi gerekebilir. Haliyle her bir hata türü için hususi ayrı bir kuyruk oluşturulabilir ve hata mesajları direkt olarak ilgili kuyruğa gönderilerek işlenebilir. Böylece hata mesajlarının izlenmesi ve çözülmesi için sadece kuyrukların takip edilmesi yeterli olacaktır.</li>
+   <li>Başka bir örnek vermemiz gerekirse eğer; E-Ticaret sistemlerinde ki sipariş süreçlerini düşünebiliriz. Biliyorsunuz ki, bir sipariş 'onaylandı', 'iptal edildi' veya 'iade edildi' şeklinde üç farklı durumda gerçekleşmektedir bir sipariş sürecinde farklı durumlara nazaran davranışlar  geliştirmek ve yönetim sergileyebilmek için her bir durum için ayrı kuyruklar oluşturulabilir ve siparişler direkt olarak ilgili kuyruklara gönderilerek işlenebilir. Bu şekilde de her durum için aynı aksiyonları alabilmek ve siparişleri işlemek daha kolay hale gelecektir.</li>
+</ul>
+
+<h3>Fanout Exchange</h3>
+<p>Mesajların, bu exchange'e bind olmuş olan tüm kuyruklara gönderilmesini sağlar. Publisher mesajların gönderildiği kutruk isimlerini dikkate almaz ve mesajları tüm kuyruklara gönderir.</p>
+<ul>
+  <li>Bir microservice yaklaşımı benimsenmiş olan mimaride tüm servislere ortak bildirilerde bulunabilmek için Fanout Exchange kullanılabilir. Böylece veri paylaşımı merkezi bir şekilde hızlı ve etkili hale getirilebilir.</li>
+</ul>
+    
+<h3>Topic Exchange</h3>
+<p>Routing Key'leri kullanarak mesajları kuyruklara yönlendirmek için kullanılan bir exchange'dir. Bu exchange ile routing key'in bir kısmına, formatına, yapısına ve yapısındaki key'lere göre kuyruklara mesaj gönderilir.</p>
+<p>Kuyruklar da, routing key'e göre bu exchange'e abone olabilir ve sadece ilgili routing key'e göre gönderilen mesajları alabilirler.</p>
+<ul>
+  <li>Log sistemi senaryoları bu exchange için biçilmiş kaftan olacaktır. Kuyruklar, log seviyelerine göre abone olabilir ve sadece routing key'ine uygun ilgili log seviyesine ait mesajları alabilir. Böylece sistem yöneticileri ya da ilgili servisler; belirli bir kategoriye veya key'e göre logları filtreleyebilir ve böylece istekleri hata veya uyarı mesajlarına odaklanabilir, izleyebilir ve istedikleri log mesajlarını gözardı edebilirler.</li>
+</ul>
+
+<h3>Header Exchange</h3>
+<p>Routing key yerine header'ları kullanarak mesajları kuyruklara yönlendirmek için kullanılan exchange'dir.</p>
+    
+
 
