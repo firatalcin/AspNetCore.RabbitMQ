@@ -30,3 +30,32 @@ Net 8 ile RabbitMQ
 <li>Yoğun işlem hacminin bulunduğu yerlerde</li>
 <li>Verilerin önemli olduğu yerlerde</li>
 </ul>
+
+<h2>Exchange Nedir?</h2>
+
+<p>Publisher tarafından gönderilen mesajların nasıl yönetileceğini ve hangi route'lara yönlendirileceğini belirlememiz konusunda kontrol sağlayan veya karar veren yapıdır.</p>
+<p>Route ise mesajların exchange üzerinden kuyruklara nasıl gönderileceğini tanımlayan mekanizmadır.</p>
+
+<h2>Binding Nedir?</h2>
+
+<p>Exchange ve Queue arasındaki ilişkiyi ifade eden yapıdır. Exchange ile kuyruk arasında bağlantı oluşturmanın terminolojik adıdır.</p>
+
+<h2>Exchange Tipleri</h2>
+
+<h3>Direct Exchange</h3>
+
+<p>Mesajların direkt olarak belirli bir kuyruğa gönderilmesini sağlayan exchange'dir.</p>
+<p>Mesaj, routing key'e uygun olan hedef kuyruklara gönderilir. Bunun için mesaj gönderilecek kuyruğun adını routing key olarak belirtmek yeterlidir.</p>
+
+<h3>Fanout Exchange</h3>
+
+<p>Mesajların, bu exchange'e bind olmuş olan tüm kuyruklara gönderilmesini sağlar. Publisher mesajların gönderildiği kuyruk isimlerini dikkate almaz ve mesajları tüm kuyruklara gönderir.</p>
+
+<h3>Topic Exchange</h3>
+
+<p>Routing key'leri kullanarak mesajları kuyruklara yönlendirmek için kullanılan bir exchange'dir. Bu exchange ile routing key'in bir kısmına/formatına/yapısındaki key'lere göre kuyruklara mesaj gönderilir.</p>
+<p>Kuyruklar da, routing key'e göre bu exchange'e abone olabilir ve sadece ilgili routing key'e göre gönderilen mesajları alabilirler.</p>
+
+<h3>Header Exchange</h3>
+
+<p>Routing key yerine header'ları kullanarak mesajları kuyruklara yönlendirmek için kullanılan exchange'dir.</p>
